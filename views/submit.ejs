@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>What's your worries?</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Song+Myung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Orbit&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  
+
+    <div class="container">
+        <div class="response-area">
+            <h1>100년 전 사람들은 어떤 고민을 하고 있었을까?</h1>
+        </div>
+        <div id="worryAnswer">
+            <div class="card char1">
+                <div id="p-text1" class="text date"></div>
+                <span id="p-text2" class="text location"></span>
+                <span id="p-text3" class="text name"></span> <hr />
+                <span id="p-text4" class="text concern"></span>
+            </div>
+            <div class="card char2">
+                <div id="p-text5" class="text date"></div>
+                <span id="p-text6" class="text location"></span>
+                <span id="p-text7" class="text name"></span> <hr />
+                <span id="p-text8" class="text concern"></span>
+            </div>
+            <div class="card char3">
+                <div id="p-text9" class="text date"></div>
+                <span id="p-text10" class="text location"></span>
+                <span id="p-text11" class="text name"></span> <hr />
+                <span id="p-text12" class="text concern"></span>
+            </div>
+        </div>
+        
+        <div class="mytext">
+            ✏️ 나의 고민 : <%= worryText %> 
+        </div>
+    </div>
+
+    <form action="http://localhost:3000/">
+        <input type="submit" id="reset" value="다시하기" />
+    </form>
+
+<script>
+
+
+
+
+const char1 = "<%= char1.date %>";
+const char2 = "<%= char1.location %>";
+const char3 = "<%= char1.name %>";
+const char4 = "<%= char1.concern %>";
+
+const char5 = "<%= char2.date %>";
+const char6 = "<%= char2.location %>";
+const char7 = "<%= char2.name %>";
+const char8 = "<%= char2.concern %>";
+
+const char9 = "<%= char3.date %>";
+const char10 = "<%= char3.location %>";
+const char11 = "<%= char3.name %>";
+const char12 = "<%= char3.concern %>";
+
+
+
+let i = 0;
+let j = 0;
+let k = 0;
+let l = 0;
+
+let o = 0;
+let p = 0;
+let q = 0;
+let r = 0;
+
+let s = 0;
+let t = 0;
+let u = 0;
+let v = 0;
+
+window.addEventListener('load', function() {
+
+  executeAsynchronously([typeWriter, typeWriter2, typeWriter3, typeWriter4, typeWriter5, typeWriter6, typeWriter7, typeWriter8, typeWriter9, typeWriter10, typeWriter11, typeWriter12], 100);
+
+});
+
+function executeAsynchronously(functions, timeout) {
+  for (var i = 0; i < functions.length; i++) {
+    setTimeout(functions[i], timeout);
+  }
+}
+// The typewriter method for i
+function typeWriter() {
+  if (i < char1.length) {
+    document.getElementById('p-text1').innerHTML += char1.charAt(i);
+    i++;
+    setTimeout(typeWriter, 50);
+
+  }
+}
+
+// The typewriter method for j
+function typeWriter2() {
+  if (j < char2.length) {
+    document.getElementById('p-text2').innerHTML += char2.charAt(j);
+    j++;
+    setTimeout(typeWriter2, 50);
+  }
+
+}
+
+// The typewriter method for k
+function typeWriter3() {
+  if (k < char3.length) {
+    document.getElementById('p-text3').innerHTML += char3.charAt(k);
+    k++;
+    setTimeout(typeWriter3, 50);
+  }
+
+}
+
+// The typewriter method for l
+function typeWriter4() {
+  if (l < char4.length) {
+    document.getElementById('p-text4').innerHTML += char4.charAt(l);
+    l++;
+    setTimeout(typeWriter4, 50);
+  }
+
+}
+
+
+
+
+
+// The typewriter method for o
+function typeWriter5() {
+  if (o < char5.length) {
+    document.getElementById('p-text5').innerHTML += char5.charAt(o);
+    o++;
+    setTimeout(typeWriter5, 50);
+
+  }
+}
+
+// The typewriter method for p
+function typeWriter6() {
+  if (p < char6.length) {
+    document.getElementById('p-text6').innerHTML += char6.charAt(p);
+    p++;
+    setTimeout(typeWriter6, 50);
+  }
+
+}
+
+// The typewriter method for q
+function typeWriter7() {
+  if (q < char7.length) {
+    document.getElementById('p-text7').innerHTML += char7.charAt(q);
+    q++;
+    setTimeout(typeWriter7, 50);
+  }
+
+}
+
+// The typewriter method for r
+function typeWriter8() {
+  if (r < char8.length) {
+    document.getElementById('p-text8').innerHTML += char8.charAt(r);
+    r++;
+    setTimeout(typeWriter8, 50);
+  }
+
+}
+
+
+
+// The typewriter method for s
+function typeWriter9() {
+  if (s < char9.length) {
+    document.getElementById('p-text9').innerHTML += char9.charAt(s);
+    s++;
+    setTimeout(typeWriter9, 50);
+
+  }
+}
+
+// The typewriter method for t
+function typeWriter10() {
+  if (t < char10.length) {
+    document.getElementById('p-text10').innerHTML += char10.charAt(t);
+    t++;
+    setTimeout(typeWriter10, 50);
+  }
+
+}
+
+// The typewriter method for u
+function typeWriter11() {
+  if (u < char11.length) {
+    document.getElementById('p-text11').innerHTML += char11.charAt(u);
+    u++;
+    setTimeout(typeWriter11, 50);
+  }
+
+}
+
+// The typewriter method for v
+function typeWriter12() {
+  if (v < char12.length) {
+    document.getElementById('p-text12').innerHTML += char12.charAt(v);
+    v++;
+    setTimeout(typeWriter12, 50);
+  }
+
+}
+
+
+</script>
+
+
+</body>
+
+
+</html>

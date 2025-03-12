@@ -65,8 +65,13 @@
             </div> </div>
 
 <script>
-document.getElementById("worries").addEventListener("submit", function() {
+document.getElementById("worries").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본 제출 막기
     document.getElementById("preload").style.display = "block"; // 로딩 화면 표시
+
+    setTimeout(() => {
+        event.target.submit(); // 일정 시간 후 폼 제출
+    }, 500); // 0.5초 지연 (필요에 따라 조정)
 });
 </script>
 

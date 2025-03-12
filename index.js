@@ -1,81 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>What's your worries?</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Song+Myung&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Orbit&display=swap" rel="stylesheet">
+import express from "express";
+import bodyParser from "body-parser";
+import OpenAI from "openai/index.mjs";
+import env from "dotenv";
 
-</head>
-<body>
+const app = express();
+const port = 3000;
 
-    <div class="container">
-        <div class="response-area">
-            <h1>
-                <span class="line-break">고민 분석기:</span>
-                <span class="line-break">100년 전으로 타임머신</span>
-            </h1>
-            <p>
-                <span class="line-break">당신의 고민을 글로 남겨보세요.</span>
-                <span class="line-break">과거의 누군가가 현재의 당신에게</span>
-                <span class="line-break">위로와 통찰을 줄 지도 몰라요.</span>
-            </p>
-        </div>
-        <div class="search_area">
-            <form method="post" id="worries">
-                <span class="button-break">
-                    <span>✏️</span>
-                    <select required name="category" id="cate">
-                        <option value="" selected disabled hidden>항목</option>
-                        <option value="workplace">직장</option>
-                        <option value="dating">연애</option>
-                        <option value="career">취업/진로</option>
-                        <option value="family">가족</option>
-                        <option value="marriage">결혼/육아</option>
-                        <option value="studies">학업/고시</option>
-                        <option value="friends">친구</option>
-                        <option value="self">자아/성격</option>
-                        <option value="business">사업/금전</option>
-                        <option value="addiction">중독</option>
-                        <option value="disease">질병/질환</option>
-                        <option value="lifestyle">생활/습관</option>
-                        <option value="etc">기타</option>
-                    </select>
-                </span>
-                <input type="text" id="worryText" name="worryText" placeholder="당신의 고민을 입력하세요.">
-                <button type="submit" class="btn_search">
-                    <span class="ico_btn_search_svg">
-                        <img src="/images/search.svg">
-                    </span>
-                </button>
-            </form>
-        </div>
-    </div>
+env.config();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
-        <div id="preload" style="display:none; position:fixed;">
-            <div class="sk-folding-cube">
-            <div class="sk-cube1 sk-cube"></div>
-            <div class="sk-cube2 sk-cube"></div>
-            <div class="sk-cube4 sk-cube"></div>
-            <div class="sk-cube3 sk-cube"></div>
-            </div> </div>
-
-<script>
-document.getElementById("worries").addEventListener("submit", function(event) {
-    event.preventDefault(); // 기본 제출 막기
-    document.getElementById("preload").style.display = "block"; // 로딩 화면 표시
-
-    setTimeout(() => {
-        event.target.submit(); // 일정 시간 후 폼 제출
-    }, 500); // 0.5초 지연 (필요에 따라 조정)
+app.get("/", (req, res) => {
+    res.render("index.ejs", { worryText: "" } )
 });
-</script>
+
+app.post("/", async (req, res) => {
+
+        const openai = new OpenAI({
+           apiKey: process.env.API_KEY
+        })
+       
+        const response = await openai.chat.completions.create({
+           model: "gpt-4o",
+           messages: [
+               {"role": "system", "content": "I need JS Objects of 3 character. each JS object's keys are name, date, nationality, concern."},
+               {"role": "user", "content": `고민의 카테고리는 ${req.body.category}이고 고민의 내용은 ${req.body.worryText}입니다.`},
+               {"role": "user", "content": "당신은 주어진 고민을 읽고 100년 전 시대상을 살려 현대인과 비슷한 고민을 하는 캐릭터 3명을 JSON 객체 배열 형식으로 만들어냅니다. 고민은 1~2줄이면 됩니다. 한국어로 답해주세요. 그 시대에 있었던 물건이나 역사적 사실을 살려주세요."},
+               {"role": "assistant", "content": `{ name : "한국 서울", date : "1925. 03", nationality: "조선", concern: "일제강점기 속에서 민족정체성을 지키기 위한 비밀 문화 활동에 참여하다 발각될까 두려워하고 있었다. 그는 교사로 일하면서 아이들에게 한글을 몰래 가르쳤고, 이것이 발각되면 직업을 잃거나 체포될 수도 있었다. 가족의 생계와 민족의 미래 사이에서 그는 매일 밤 잠을 이루지 못했다." }, { name : "존슨", date : "1941. 11", nationality: "프랑스", concern: "매번 터지는 포탄소리에 두려움이 일었다." }, { name : "흑인 간호사 Sarah Johnson", date : "1925. 09", nationality: "아프리카", concern: "인종 차별적인 의료 시스템 속에서 환자들에게 적절한 치료를 제공하기 위해 고군분투하고 있었다. 그녀는 백인 간호사보다 낮은 임금을 받았고, 종종 더 많은 환자를 담당해야 했다. 그녀는 할렘에서 의료 서비스를 확장하고 싶었지만, 자금과 제도적 지원이 부족했다. 그녀는 직장에서의 인종 차별에 맞서 발언할지, 아니면 조용히 일자리를 지킬지 갈등하고 있었다." }` }
+           ]
+       });
+       
+        const worryanswer = JSON.stringify(response.choices[0].message.content)
+       const strWorry0 = worryanswer.replace("```json", "");
+       const strWorry1 = strWorry0.replace(/```/g, "");
+       const strWorry2 = strWorry1.replace(/\\n/g, "");
+       const strWorry3 = strWorry2.replace(/\\/g, "");
+       const strWorry4 = strWorry3.replace("[", "");
+       const strWorry5 = strWorry4.replace("]", "");
+       const strWorry6 = strWorry5.replace(/: /g, "");
+       const strWorry7 = strWorry6.replace(/{ /g, "");
+       const strWorry8 = strWorry7.replace(/ }/g, "");
+       const strWorry9 = strWorry8.replace(/,/g, "");
+       const strWorry10 = strWorry9.replace(/  /g, "");
+       
+       const splitWords = strWorry10.split('"');
+       
+       splitWords.shift();
+       splitWords.pop();
+       
+       const groupObject = []
+       
+       for (let i = 3; i < splitWords.length; i += 16) {
+           groupObject.push({
+               name: splitWords[i],
+               date: splitWords[i + 4],
+               location: splitWords[i + 8],
+               concern: splitWords[i + 12]
+           });
+       }
+       
+       const char1 = {
+           name: groupObject[0].name,
+           date: groupObject[0].date,
+           location: groupObject[0].location,
+           concern: groupObject[0].concern
+       }
+       
+       const char2 = {
+           name: groupObject[1].name,
+           date: groupObject[1].date,
+           location: groupObject[1].location,
+           concern: groupObject[1].concern
+       }
+       
+       const char3 = {
+           name: groupObject[2].name,
+           date: groupObject[2].date,
+           location: groupObject[2].location,
+           concern: groupObject[2].concern
+       }
+       
+           res.render("submit.ejs", { worryText : req.body.worryText, category : req.body.category, char1: char1, char2: char2, char3: char3 } )
+       
+       });
 
 
-</body>
-</html>
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+
+

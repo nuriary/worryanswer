@@ -17,6 +17,10 @@ h1 {
 }
 
 .text {
+    font-size: 0.8rem;
+}
+
+.text {
     font-family: "Orbit", sans-serif;
     font-weight: 400;
     font-style: normal;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>What's your worries?</title>
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,9 @@
 
     <div class="container">
         <div class="response-area">
-            <h1>100년 전 사람들은 어떤 고민을 하고 있었을까?</h1>
+            <h1>
+              <span class="line-break">100년 전 사람들은</span>
+              <span class="line-break">어떤 고민을 하고 있었을까?</span></h1>
         </div>
         <div id="worryAnswer">
             <div class="card char1">
@@ -44,7 +46,7 @@
         </div>
     </div>
 
-    <form action="https://worryanswer.onrender.com">
+    <form action="http://localhost:3000/">
         <input type="submit" id="reset" value="다시하기" />
     </form>
 

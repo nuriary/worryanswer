@@ -1,6 +1,10 @@
 
 body {
     background-color: blanchedalmond;
+    background-image: url(../images/bubble5.png);
+    background-repeat: no-repeat;
+    background-size: 21%;
+    background-position: 50% 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -228,6 +232,11 @@ div#preload {
         max-width: 80%;
         margin: 0 auto;
         padding: 10px;
+        background-color: blanchedalmond;
+        background-repeat: no-repeat;
+        background-image: url(../images/bubble4.png);
+        background-size: 90%;
+        background-position: 50% 60px;
     }
 
     h1 {

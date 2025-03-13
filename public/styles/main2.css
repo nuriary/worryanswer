@@ -17,10 +17,6 @@ h1 {
 }
 
 .text {
-    font-size: 0.8rem;
-}
-
-.text {
     font-family: "Orbit", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -224,6 +220,10 @@ div#preload {
     animation-delay: .6s;
 }
 
+.copyright {
+    font-size: 12px;
+}
+
 @keyframes sk-foldCubeAngle{0%,10%{-webkit-transform:perspective(140px) rotateX(-180deg);transform:perspective(140px) rotateX(-180deg);opacity:0}25%,75%{-webkit-transform:perspective(140px) rotateX(0);transform:perspective(140px) rotateX(0);opacity:1}100%,90%{-webkit-transform:perspective(140px) rotateY(180deg);transform:perspective(140px) rotateY(180deg);opacity:0}}
 
 
@@ -239,6 +239,10 @@ div#preload {
     h1 {
         font-size: 1.5rem;
         white-space: pre-line;
+    }
+
+    .text {
+        font-size: 0.8rem;
     }
 
     .line-break {
@@ -296,6 +300,10 @@ div#preload {
 
     #reset {
         margin-bottom: 50px;
+    }
+
+    .copyright {
+        font-size: 8px;
     }
 
 }

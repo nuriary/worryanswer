@@ -4,7 +4,7 @@ body {
     background-image: url(../images/bubble5.png);
     background-repeat: no-repeat;
     background-size: 21%;
-    background-position: 50% 200px;
+    background-position: 50% 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -223,6 +223,10 @@ div#preload {
     animation-delay: .6s;
 }
 
+.copyright {
+    font-size: 12px;
+}
+
 @keyframes sk-foldCubeAngle{0%,10%{-webkit-transform:perspective(140px) rotateX(-180deg);transform:perspective(140px) rotateX(-180deg);opacity:0}25%,75%{-webkit-transform:perspective(140px) rotateX(0);transform:perspective(140px) rotateX(0);opacity:1}100%,90%{-webkit-transform:perspective(140px) rotateY(180deg);transform:perspective(140px) rotateY(180deg);opacity:0}}
 
 
@@ -299,6 +303,10 @@ div#preload {
 
     #reset {
         margin-bottom: 50px;
+    }
+
+    .copyright {
+        font-size: 8px;
     }
 
 }
